@@ -4,8 +4,9 @@ import { appInfo } from "./appInfo";
 import { TypeInput } from "supertokens-node/types";
 import { env } from "process";
 
-export const backendConfig = (): TypeInput => {
+export const backendConfig = (): any => {
   return {
+    enableDebugLogs: true,
     framework: "express",
     supertokens: {
       connectionURI: env.SUPERTOKENS_CONNECTIONURI!,

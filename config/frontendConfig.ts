@@ -1,23 +1,22 @@
-import ThirdPartyEmailPasswordReact from "supertokens-auth-react/recipe/thirdpartyemailpassword";
-import SessionReact from "supertokens-auth-react/recipe/session";
-import { appInfo } from "./appInfo";
+import ThirdPartyReact, {Google, Facebook} from 'supertokens-auth-react/recipe/thirdparty'
+import SessionReact from 'supertokens-auth-react/recipe/session'
+import { appInfo } from './appInfo'
 
-export let frontendConfig = () => {
+export const frontendConfig = () => {
   return {
     appInfo,
     recipeList: [
-      ThirdPartyEmailPasswordReact.init({
-        emailVerificationFeature: {
-          mode: "REQUIRED",
-        },
+      ThirdPartyReact.init({
         signInAndUpFeature: {
           providers: [
-            ThirdPartyEmailPasswordReact.Google.init(),
-            // ThirdPartyEmailPasswordReact.Github.init(),
+            ThirdPartyReact.Google.init(),
+            // ThirdPartyReact.Facebook.init(),
+            // ThirdPartyReact.Apple.init(),
+            // ThirdPartyReact.Github.init(),
           ],
         },
       }),
       SessionReact.init(),
     ],
-  };
-};
+  }
+}
