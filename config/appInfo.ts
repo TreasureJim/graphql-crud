@@ -8,8 +8,10 @@ export const websiteDomain =
   `http://localhost:${port}`;
 
 export const appInfo = {
-  appName: "graphql-crud",
-  websiteDomain,
-  apiDomain: websiteDomain,
-  apiBasePath,
-};
+	// learn more about this on https://supertokens.com/docs/thirdparty/appinfo
+	appName: "graphql-crud",
+	apiDomain: "http://localhost:3000",
+	websiteDomain: "http://localhost:3000",
+	apiBasePath: "/api/auth",
+	websiteBasePath: "/auth"
+}

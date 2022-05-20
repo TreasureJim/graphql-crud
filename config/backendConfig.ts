@@ -20,7 +20,7 @@ export const backendConfig = (): any => {
             // We have provided you with development keys which you can use for testsing.
             // IMPORTANT: Please replace them with your own OAuth keys for production use.
             ThirdPartyNode.Google({
-              clientId: env.GOOGLE_OAUTH_CLIENTID!,
+              clientId: env.GOOGLE_OATH_CLIENTID!,
               clientSecret: env.GOOGLE_OATH_CLIENTSECRET!,
             }),
             // ThirdPartyNode.Github({
