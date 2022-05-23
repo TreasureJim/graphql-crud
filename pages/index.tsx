@@ -9,11 +9,11 @@ const Home: NextPage = () => {
       <nav>
         <div className="flex justify-end items-center h-20 fixed w-full top-0 mx-auto text-right bg-black text-white">
           <span className="">Start your own shop</span>
-          <button className="ml-5 border-2 border-white py-4 px-12">
+          <button className="m-5 mr-0 border-2 border-white py-2 px-12 rounded-sm">
             Register
           </button>
-          <button className="border-2 bg-white text-black py-4 px-12">
-            Register
+          <button className="m-5 border-2 bg-white text-black py-2 px-12 border-white rounded-sm">
+            Login
           </button>
         </div>
       </nav>
