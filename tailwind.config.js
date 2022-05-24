@@ -8,11 +8,13 @@ module.exports = {
   },
   plugins: [],
   theme: {
-    fontFamily: {
-      sans: ["Darker Grotesque", "sans-serif"],
-    },
-    fontSize: {
-      base: ["1.25rem", "30px"],
+    extend: {
+      fontFamily: {
+        sans: ["Darker Grotesque", "sans-serif"],
+      },
+      fontSize: {
+        base: ["1.25rem", "30px"],
+      },
     },
   },
 };
