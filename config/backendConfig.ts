@@ -34,6 +34,25 @@ export const backendConfig = (): any => {
         jwt: {
           enable: true,
         },
+        override: {
+          functions: function (originalImplementation) {
+            return {
+              ...originalImplementation,
+              createNewSession: async (input) => {
+                input.accessTokenPayload = {
+                  ...input.accessTokenPayload,
+                  "https://hasura.io/jwt/claims": {
+                    "x-hasura-user-id": input.userId,
+                    "x-hasura-default-role": "user",
+                    "x-hasura-allowed-roles": ["user"],
+                  },
+                };
+
+                return originalImplementation.createNewSession(input);
+              },
+            };
+          },
+        },
       }),
     ],
     isInServerlessEnv: true,
