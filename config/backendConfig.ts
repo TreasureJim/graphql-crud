@@ -30,7 +30,11 @@ export const backendConfig = (): any => {
           ],
         },
       }),
-      SessionNode.init(),
+      SessionNode.init({
+        jwt: {
+          enable: true,
+        },
+      }),
     ],
     isInServerlessEnv: true,
   };
