@@ -39,7 +39,7 @@ function CreateWSLink() {
   //     })
   //   );
   const httpLink = new HttpLink({
-    uri: `http://hasura:8080/v1/graphql`,
+    uri: `http://${env.NEXT_PUBLIC_HASURA_HOST}`,
     credentials: "include",
     // headers, // auth token is fetched on the server side
     fetch,
