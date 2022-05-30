@@ -24,32 +24,25 @@ async function RequestAccessToken() {
 }
 
 function CreateWSLink() {
-  //   return new WebSocketLink(
-  //     new SubscriptionClient(`wss://hasura:8080/v1/graphql`, {
-  //       lazy: true,
-  //       reconnect: true,
-  //       connectionParams: async () => {
-  //         await RequestAccessToken(); // happens on the client
-  //         return {
-  //           headers: {
-  //             authorization: accessToken ? `Bearer ${accessToken}` : "",
-  //           },
-  //         };
-  //       },
-  //     })
-  //   );
-  const httpLink = new HttpLink({
-    uri: `http://${env.NEXT_PUBLIC_HASURA_HOST}`,
-    credentials: "include",
-    // headers, // auth token is fetched on the server side
-    fetch,
-  });
-  return httpLink;
+  return new WebSocketLink(
+    new SubscriptionClient(env.NEXT_PUBLIC_HASURA_WSS_HOST, {
+      lazy: true,
+      reconnect: true,
+      connectionParams: async () => {
+        await RequestAccessToken(); // happens on the client
+        return {
+          headers: {
+            authorization: accessToken ? `Bearer ${accessToken}` : "",
+          },
+        };
+      },
+    })
+  );
 }
 
 function createHttpLink(headers: any) {
   const httpLink = new HttpLink({
-    uri: `http://${env.NEXT_PUBLIC_HASURA_HOST}`,
+    uri: env.NEXT_PUBLIC_HASURA_HOST,
     credentials: "include",
     headers, // auth token is fetched on the server side
     fetch,
@@ -63,12 +56,13 @@ export default function CreateApolloClient(
 ) {
   const ssrMode = typeof window === "undefined";
   let link;
-  if (ssrMode) {
-    // link = createHttpLink(headers);
-    link = CreateWSLink();
-  } else {
-    link = CreateWSLink();
-  }
+  //   if (ssrMode) {
+  //     link = createHttpLink(headers);
+  //   } else {
+  //     link = CreateWSLink();
+  //   }
+  link = createHttpLink({});
+
   return new ApolloClient({
     ssrMode,
     link,

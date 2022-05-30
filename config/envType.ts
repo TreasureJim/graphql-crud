@@ -2,6 +2,7 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       NEXT_PUBLIC_HASURA_HOST: string;
+      NEXT_PUBLIC_HASURA_WSS_HOST: string;
       APP_HOST: string;
 
       //   GOOGLE_OATH_CLIENTID: string;
