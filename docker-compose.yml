@@ -2,12 +2,11 @@ version: "3.3"
 
 services:
   web:
+    hostname: web
     ports:
       - 3000:3000
       - 9229:9229
     build: .
-    links:
-      - graphql
     volumes:
       - .:/server
     command: 
@@ -15,10 +14,13 @@ services:
       - "run"
       - "dev"
 
-  graphql:
+  hasura:
     env_file:
       - hasura.env
     image: hasura/graphql-engine
-    container_name: graphql-graphql
+    # container_name: graphql-hasura
+    hostname: hasura
     ports:
       - 8080:8080
+    depends_on:
+      - web
