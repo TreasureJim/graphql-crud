@@ -10,3 +10,6 @@ Development environment can be easily setup:
 1. Install all packages with `npm i`
 2. Create `.env` and `hasura.env` files with the respective schemas from `.env.schema` and `hasura.env.schema`
 3. Run `docker-compose up`
+
+# Changes
+A list of planned goals/ changes are can be found [here](https://github.com/TreasureJim/graphql-crud/labels/feature)
