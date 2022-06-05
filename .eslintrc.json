@@ -18,6 +18,7 @@
     "quotes": [2, "double"],
     "indent": ["warn", "tab"],
     "no-tabs": 0,
-    "react/react-in-jsx-scope": false
+    "react/react-in-jsx-scope": 2,
+    "object-curly-spacing": 0
   }
 }
