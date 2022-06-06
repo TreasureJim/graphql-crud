@@ -17,10 +17,11 @@ services:
 
   db:
     env_file:
-      - db.env
+      - .db.env
     image: postgres
     hostname: db
     ports:
       - 5432:5432
     volumes:
       - /db/graphql-crud/data:/var/lib/postgresql
+      - ./postgres.config:/var/lib/postgresql/data/postgresql.conf
