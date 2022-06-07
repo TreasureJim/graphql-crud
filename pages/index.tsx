@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ClientOnly } from "../components/ClientOnly";
 import Layout from "../components/layout";
-import styles from './index.module.css'
 
 import modelLeft from "../public/images/model-left.jpg";
 import modelRight from "../public/images/model-right.jpg";
