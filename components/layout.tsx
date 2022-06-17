@@ -1,37 +1,37 @@
-import { useUser } from "@auth0/nextjs-auth0";
-import Image from "next/image"
-import Link from "next/link";
+/* eslint-disable require-jsdoc */
+import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
+// import Link from "next/link";
 import logo from "../public/dev-logo.svg";
 
 export default function Layout() {
-
 	function userElement(): JSX.Element {
-		const { isLoading, user } = useUser();
+		const { data: session, status } = useSession();
 
-		if (isLoading)
-			return (<div></div>);
+		if (status == "loading") {
+			return <div></div>;
+		}
 
-		if (user) {
+		if (status == "authenticated") {
 			return (<div className="mx-5 flex justify-center items-center">
-				{user?.picture ?
-					<Image className="inline object-cover w-12 h-12 mr-2 rounded-full" src={user.picture} layout="fixed" height="42px" width="42px" />
-					:
+				{session.user?.image ?
+					<Image className="inline object-cover w-12 h-12 mr-2 rounded-full" src={session.user.image} layout="fixed" height="42px" width="42px" /> :
 					<div></div>
 				}
-				<span className="ml-2">{user.name}</span>
-				<Link href="/api/auth/logout">
+				<span className="ml-2">{session.user?.name}</span>
+				<button onClick={() => signOut()}>
 					<div className="ml-5 bg-white text-black py-2 px-12 hover:bg-gray-100">
 						Sign out
 					</div>
-				</Link>
+				</button>
 			</div>);
 		} else {
 			return (
-				<Link href="/api/auth/login">
+				<button onClick={() => signIn()} >
 					<div className="m-5 border-2 bg-white text-black py-2 px-12 border-white rounded-sm">
 						Login
 					</div>
-				</Link>
+				</button>
 			);
 		}
 	}
