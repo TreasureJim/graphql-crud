@@ -10,18 +10,18 @@ export const Store = objectType({
 		t.string("description");
 		t.string("imageUrl");
 
-		t.field("user", {
-			type: User,
-			async resolve(parent, _args, ctx) {
-				return await ctx.prisma.store
-					.findFirst({
-						where: {
-							id: parent.id!,
-						},
-					})
-					.user();
-			},
-		});
+		// t.field("user", {
+		// 	type: User,
+		// 	async resolve(parent, _args, ctx) {
+		// 		return await ctx.prisma.store
+		// 			.findFirst({
+		// 				where: {
+		// 					id: parent.id!,
+		// 				},
+		// 			})
+		// 			.user();
+		// 	},
+		// });
 
 		t.list.field("products", {
 			type: Product,
