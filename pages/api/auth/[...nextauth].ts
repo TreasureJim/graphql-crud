@@ -1,9 +1,12 @@
 import NextAuth from "next-auth/next";
-import GoogleProvider from "next-auth/providers/google";
+// import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import { env } from "process";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "../../../lib/prisma";
 
 export default NextAuth({
+	adapter: PrismaAdapter(prisma),
 	secret: env.AUTH_SECRET,
 	providers: [
 		// GoogleProvider({
@@ -15,4 +18,7 @@ export default NextAuth({
 			clientSecret: env.AUTH_GITHUB_SECRET,
 		}),
 	],
+	session: {
+		strategy: "jwt",
+	},
 });
