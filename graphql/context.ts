@@ -1,3 +1,4 @@
+import { User } from './types/User';
 import { getSession } from "next-auth/react";
 import { PrismaClient } from "@prisma/client";
 import prisma from "../lib/prisma";
@@ -5,6 +6,7 @@ import { DefaultSession } from "next-auth";
 
 export type Context = {
 	user?: DefaultSession["user"];
+	userId?: string;
 	prisma: PrismaClient;
 };
 
@@ -15,8 +17,18 @@ export async function createContext({ req, res }: any): Promise<Context> {
 
 	const { user } = session;
 
+	const userId = (await prisma.user.findFirst({
+		where: {
+			email: user?.email!,
+		},
+		select: {
+			id: true,
+		},
+	}))?.id;
+
 	return {
 		user,
+		userId,
 		prisma,
 	};
 }
