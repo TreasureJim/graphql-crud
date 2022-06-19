@@ -24,10 +24,15 @@ export const User = objectType({
 export const UsersQuery = extendType({
 	type: "Query",
 	definition(t) {
-		t.nonNull.list.field("users", {
+		t.nonNull.field("user", {
 			type: User,
 			resolve(_parent, _args, ctx) {
-				return ctx.prisma.user.findMany();
+				if (!ctx.user || !ctx.user.email) return Error("You must be logged in to get your user details");
+				return ctx.prisma.user.findFirst({
+					where: {
+						email: ctx.user?.email,
+					},
+				});
 			},
 		});
 	},
