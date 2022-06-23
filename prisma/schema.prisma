@@ -52,13 +52,11 @@ model Store {
 }
 
 model Product {
-    id            String  @id @default(uuid())
-    name          String
-    description   String?
-    price         Decimal @db.Money
-    brand         String
-    creatorReview String?
-    imageUrl      String?
+    id          String  @id @default(uuid())
+    name        String
+    description String?
+    price       Decimal @db.Money
+    imageUrl    String?
 
     store   Store  @relation(fields: [storeId], references: [id])
     storeId String
