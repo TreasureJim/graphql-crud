@@ -1,6 +1,5 @@
-import { extendType, objectType } from "nexus";
+import { extendType, nonNull, nullable, objectType, stringArg } from "nexus";
 import { Product } from "./Product";
-import { User } from "./User";
 
 export const Store = objectType({
 	name: "Store",
@@ -9,19 +8,6 @@ export const Store = objectType({
 		t.string("name");
 		t.string("description");
 		t.string("imageUrl");
-
-		// t.field("user", {
-		// 	type: User,
-		// 	async resolve(parent, _args, ctx) {
-		// 		return await ctx.prisma.store
-		// 			.findFirst({
-		// 				where: {
-		// 					id: parent.id!,
-		// 				},
-		// 			})
-		// 			.user();
-		// 	},
-		// });
 
 		t.list.field("products", {
 			type: Product,
@@ -45,6 +31,52 @@ export const StoresQuery = extendType({
 			type: Store,
 			resolve(_parent, _args, ctx) {
 				return ctx.prisma.store.findMany();
+			},
+		});
+
+		t.field("storeById", {
+			type: Store,
+			args: {
+				id: nonNull(stringArg()),
+			},
+			resolve(_parent, args, ctx) {
+				const store = ctx.prisma.store.findFirst({
+					where: {
+						id: args.id,
+					},
+				});
+
+				if (!store) throw new Error(`Could not find store with id: ${args.id}`);
+				return store;
+			},
+		});
+	},
+});
+
+export const StoreMutation = extendType({
+	type: "Mutation",
+	definition(t) {
+		t.nonNull.field("createStore", {
+			type: Store,
+			args: {
+				name: nonNull(stringArg()),
+				description: nullable(stringArg()),
+				imageUrl: nullable(stringArg()),
+			},
+			async resolve(_parent, args, ctx) {
+				if (!ctx.user) {
+					throw new Error("You need to be logged in to create a store");
+				}
+
+				const newStore = {
+					name: args.name,
+					description: args.description,
+					userId: ctx.userId!,
+				};
+
+				return await ctx.prisma.store.create({
+					data: newStore,
+				});
 			},
 		});
 	},
