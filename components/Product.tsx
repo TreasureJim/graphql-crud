@@ -13,7 +13,7 @@ interface IProductProps {
 
 export const Product: FC<IProductProps> = ({ product }) => {
 	return (
-		<div className="w-72 h-96 relative hover:shadow-lg m-5 transition rounded-md">
+		<div className="w-72 relative hover:shadow-lg m-5 transition rounded-md">
 			<div className="relative w-72 h-96">
 				{product.imageUrl &&
 					<Image src={product.imageUrl} layout="fill" />
