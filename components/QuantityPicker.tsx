@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { MinusIcon, PlusIcon } from "@heroicons/react/outline";
+import { PlusIcon, MinusIcon } from "@heroicons/react/solid";
 
 export const QuantityPicker: FC = () => {
 	const [counter, setCounter] = useState(0);
@@ -10,10 +10,10 @@ export const QuantityPicker: FC = () => {
 	const plus = () => setCounter(counter + 1);
 
 	return (
-		<div className="w-20 m-auto flex items-center justify-center">
-			<span className="block text-5xl px-5 cursor-pointer select-none">-</span>
-
-			<span className="block text-5xl px-5 cursor-pointer select-none">+</span>
-		</div>
+		<div className="flex flex-row justify-center items-center h-10 w-fit">
+			<div className="h-full bg-gray-200 w-10 flex rounded-l-md" onClick={minus}><MinusIcon className="w-4 m-auto" /></div>
+			<div className="bg-white w-14 px-4 text-4xl text-center select-none">{counter}</div>
+			<div className="h-full bg-gray-200 w-10 flex rounded-r-md" onClick={plus}><PlusIcon className="w-4 m-auto" /></div>
+		</div >
 	);
 };
