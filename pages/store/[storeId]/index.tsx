@@ -49,7 +49,9 @@ const StoreId: NextPage = () => {
 			<div className="flex flex-wrap flex-row justify-between">
 				{data?.storeById.products.map((product) => (
 					<Link key={product.id} href={`/store/${storeId}/product/${product.id}`}>
-						<Product product={product} />
+						<div className="cursor-pointer">
+							<Product product={product} />
+						</div>
 					</Link>
 				))}
 			</div>
