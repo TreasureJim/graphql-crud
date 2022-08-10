@@ -1,4 +1,4 @@
-import { User } from './types/User';
+import { User } from "./types/User";
 import { getSession } from "next-auth/react";
 import { PrismaClient } from "@prisma/client";
 import prisma from "../lib/prisma";
