@@ -1,12 +1,9 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { ClientOnly } from "../components/ClientOnly";
 import Layout from "../components/layout";
-import styles from './index.module.css'
 
-import modelLeft from "../public/images/model-left.jpg";
-import modelRight from "../public/images/model-right.jpg";
+import homePageImage from "../public/images/home-page.jpg";
 
 const Home: NextPage = () => {
 	return (
@@ -15,31 +12,37 @@ const Home: NextPage = () => {
 				<Layout />
 			</ClientOnly>
 
-			<div className="flex flex-row absolute bottom-0 w-full h-screen text-7xl overflow-hidden">
-
-				<div className="w-2/4 transition-all duration-300">
-					<Image src={modelLeft} alt="model left" layout="responsive" className="absolute top-0 right-0" />
-					<div className="absolute bottom-0 left-1">
-						Build -- NOT IMPLEMENTED
+			<div className="mx-12 mb-12">
+				<div className="relative mb-12 mt-0">
+					<Image src={homePageImage} layout="responsive" />
+					<div className="absolute top-1/3 left-[14%]">
+						<p className="leading-3 text-white font-sans text-[4rem] font-bold">SHOP WHERE YOU WANT</p>
+						<p className="text-white font-sans text-[4rem] font-bold">WHEN YOU WANT</p>
 					</div>
 				</div>
-				<Link href="/store">
-					<div className="w-2/4 hover:brightness-75 transition-all duration-300 cursor-pointer">
-						<Image src={modelRight} alt="model right" layout="responsive" />
-						<div className="absolute bottom-0 right-1">
-							Browse
+
+				<div className="flex flex-row">
+					<div>
+						<div className="m-auto max-w-3/4">
+							<h1 className="text-center">Where am I?</h1>
+							<p className="mx-auto">This site was built to allow <a href="https://www.github.com/TreasureJim" target="blank" className="text-pink-500">me</a> to build my skills with GraphQL with NextJS and experiment with different designs and UX. You can view the code <a href="https://www.github.com/TreasureJim/graphql-crud" target="blank" className="text-pink-500">here</a>.</p>
+							<p>You can browse the stores and products in them or create your own store with products and add images to them.</p>
 						</div>
 					</div>
-				</Link>
+					<div className="mb-0 p-7 bg-blue">
+						<h3 className="text-center underline text-pink-500">Technologies</h3>
+						<h4 className="text-center">NextJS</h4>
+						<h4 className="text-center">Heroku</h4>
+						<h4 className="text-center">Tailwind CSS</h4>
+						<h4 className="text-center">Apollo GraphQL</h4>
+						<h4 className="text-center">Postgres Server</h4>
+						<h4 className="text-center">OAuth</h4>
+					</div>
+				</div>
 			</div>
+
 		</>
 	);
 };
-
-export const getStaticProps: GetStaticProps = async (context) => {
-	return {
-		props: {}
-	}
-}
 
 export default Home;
